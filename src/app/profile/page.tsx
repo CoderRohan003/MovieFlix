@@ -30,7 +30,7 @@ const favoriteMovies = [
     },
 ];
 
-{/* A card to display a single user statistic */}
+{/* A card to display a single user statistic */ }
 const StatCard = ({
     icon,
     label,
@@ -49,11 +49,11 @@ const StatCard = ({
     </div>
 );
 
-{/* Renders the user's profile page */}
+{/* Renders the user's profile page */ }
 export default function ProfilePage() {
     const [userProfile, setUserProfile] = useState<any>(null);
 
-    {/* Fetches the user's profile data from Appwrite */}
+    {/* Fetches the user's profile data from Appwrite */ }
     useEffect(() => {
         async function fetchProfile() {
             try {

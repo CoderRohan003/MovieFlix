@@ -20,7 +20,7 @@ interface Message {
   content: string | MovieDetails[];
 }
 
-{/* A chatbot component for movie suggestions */}
+{/* A chatbot component for movie suggestions */ }
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -33,32 +33,32 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  {/* Auto-scroll to the latest message */}
+  {/* Auto-scroll to the latest message */ }
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-  
-  {/* Handle the user's message submission */}
+
+  {/* Handle the user's message submission */ }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
 
     const userMessage: Message = { role: 'user', content: input };
     const newMessages = [...messages, userMessage];
-    
+
     setMessages(newMessages);
     setInput('');
     setLoading(true);
 
     try {
       const suggestions = await getMovieSuggestionsFromLLM(newMessages);
-      
+
       if (!suggestions || suggestions.length === 0) {
         throw new Error("Couldn't find any movie suggestions for that.");
       }
 
       const movieDetails = await getMovieDetailsFromTMDB(suggestions);
-      
+
       const botMessage: Message = { role: 'bot-movies', content: movieDetails };
       setMessages((prev) => [...prev, botMessage]);
 
@@ -143,7 +143,7 @@ export default function Chatbot() {
   );
 }
 
-{/* A small card to display a movie suggestion inside the chat window */}
+{/* A small card to display a movie suggestion inside the chat window */ }
 const MovieSuggestionCard = ({ movie }: { movie: MovieDetails }) => (
   <Link href={`/movies/${movie.id}`} className="flex items-center gap-3 bg-gray-800 p-2 rounded-lg hover:bg-gray-700/50 transition-colors">
     <img
@@ -158,7 +158,7 @@ const MovieSuggestionCard = ({ movie }: { movie: MovieDetails }) => (
   </Link>
 );
 
-{/* Gets structured movie suggestions from the Gemini API */}
+{/* Gets structured movie suggestions from the Gemini API */ }
 async function getMovieSuggestionsFromLLM(chatHistory: Message[]): Promise<MovieSuggestion[]> {
   const systemPrompt = `You are a friendly and helpful movie suggestion chatbot. Based on the user's request and the conversation history, suggest 3 movies. Prioritize Hindi movies unless another language is specified. If no good Hindi matches are found, you can suggest popular English-language movies. Today's date is August 14, 2025. The user is in India. For follow-up questions like "suggest more", provide 3 *different* movies based on the original request's context. Only return a JSON array of objects, where each object has "title" (string) and "year" (number) properties.`;
 
@@ -213,22 +213,22 @@ async function getMovieSuggestionsFromLLM(chatHistory: Message[]): Promise<Movie
 
   const result = await response.json();
   if (!result.candidates || result.candidates.length === 0) {
-      throw new Error("I couldn't generate a response for that. Please try a different query.");
+    throw new Error("I couldn't generate a response for that. Please try a different query.");
   }
   const text = result.candidates[0].content.parts[0].text;
   return JSON.parse(text);
 }
 
-{/* Fetches full movie details from TMDB for each suggestion */}
+{/* Fetches full movie details from TMDB for each suggestion */ }
 async function getMovieDetailsFromTMDB(suggestions: MovieSuggestion[]): Promise<MovieDetails[]> {
   const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;
-  
+
   const moviePromises = suggestions.map(async (suggestion) => {
     const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(suggestion.title)}&primary_release_year=${suggestion.year}`;
     const response = await fetch(searchUrl);
     const data = await response.json();
     const movie = data.results[0];
-    
+
     if (movie) {
       return {
         ...suggestion,

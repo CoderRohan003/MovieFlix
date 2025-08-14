@@ -12,7 +12,7 @@ interface MovieResult {
   release_date: string;
 }
 
-{/* A search bar with a debounced dropdown for live results */}
+{/* A search bar with a debounced dropdown for live results */ }
 export default function NavbarSearch() {
   const router = useRouter();
   const [query, setQuery] = useState('');
@@ -21,7 +21,7 @@ export default function NavbarSearch() {
   const [isFocused, setIsFocused] = useState(false);
   const searchRef = useRef<HTMLFormElement>(null);
 
-  {/* Debounce API calls to prevent firing on every keystroke */}
+  {/* Debounce API calls to prevent firing on every keystroke */ }
   useEffect(() => {
     if (!query.trim()) {
       setResults([]);
@@ -55,7 +55,7 @@ export default function NavbarSearch() {
     return () => clearTimeout(debounceTimer);
   }, [query]);
 
-  {/* Close the dropdown when clicking outside the component */}
+  {/* Close the dropdown when clicking outside the component */ }
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
@@ -68,14 +68,14 @@ export default function NavbarSearch() {
     };
   }, []);
 
-  {/* Clear the search input and results */}
+  {/* Clear the search input and results */ }
   const handleClear = () => {
     setQuery('');
     setResults([]);
     setIsFocused(false);
   };
-  
-  {/* Navigate to the full search page on Enter */}
+
+  {/* Navigate to the full search page on Enter */ }
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!query.trim()) return;

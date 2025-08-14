@@ -12,12 +12,12 @@ interface Movie {
   posterPath: string;
 }
 
-{/* A loading skeleton for movie cards */}
+{/* A loading skeleton for movie cards */ }
 const MovieCardSkeleton = () => (
   <div className="w-full aspect-[2/3] bg-gray-800 rounded-lg animate-pulse"></div>
 );
 
-{/* A component to show when the watchlist is empty */}
+{/* A component to show when the watchlist is empty */ }
 const EmptyState = () => (
   <div className="flex flex-col items-center justify-center text-center text-gray-500 mt-16">
     <FaRegCompass size={60} className="mb-4" />
@@ -26,12 +26,12 @@ const EmptyState = () => (
   </div>
 );
 
-{/* Renders the user's saved movies watchlist */}
+{/* Renders the user's saved movies watchlist */ }
 export default function SavedMoviesPage() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
 
-  {/* Fetches the list of saved movies on component mount */}
+  {/* Fetches the list of saved movies on component mount */ }
   useEffect(() => {
     const fetchSavedMovies = async () => {
       try {
@@ -53,7 +53,7 @@ export default function SavedMoviesPage() {
     fetchSavedMovies();
   }, []);
 
-  {/* Removes a movie from the user's watchlist */}
+  {/* Removes a movie from the user's watchlist */ }
   async function handleRemove(id: string) {
     try {
       const movieToRemove = movies.find(m => m.$id === id);
@@ -65,7 +65,7 @@ export default function SavedMoviesPage() {
       console.error("Failed to remove movie:", error);
     }
   }
-  
+
   return (
     <div className="p-4 md:p-8 bg-gray-950 min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -92,7 +92,7 @@ export default function SavedMoviesPage() {
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </Link>
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                   <h3 className="text-white font-bold text-lg drop-shadow-md">
                     {movie.title}

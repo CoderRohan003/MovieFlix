@@ -6,7 +6,7 @@ import { fetchMovieDetails } from "@/lib/tmdb";
 import { use } from "react";
 import { FaBookmark, FaRegBookmark, FaStar, FaPlay } from "react-icons/fa";
 
-{/* Skeleton UI for the movie detail page */}
+{/* Skeleton UI for the movie detail page */ }
 const MovieDetailSkeleton = () => (
     <div className="max-w-6xl mx-auto py-12 px-4 animate-pulse">
         <div className="flex flex-col md:flex-row gap-8">
@@ -23,14 +23,14 @@ const MovieDetailSkeleton = () => (
     </div>
 );
 
-{/* Fetches and displays the details for a single movie */}
+{/* Fetches and displays the details for a single movie */ }
 export default function MovieDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = use(params);
     const [movie, setMovie] = useState<any>(null);
     const [saved, setSaved] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    {/* Load movie details and saved status */}
+    {/* Load movie details and saved status */ }
     useEffect(() => {
         const loadMovie = async () => {
             try {
@@ -47,7 +47,7 @@ export default function MovieDetailPage({ params }: { params: Promise<{ slug: st
         loadMovie();
     }, [slug]);
 
-    {/* Save or unsave the movie */}
+    {/* Save or unsave the movie */ }
     const toggleSave = async () => {
         try {
             if (saved) {

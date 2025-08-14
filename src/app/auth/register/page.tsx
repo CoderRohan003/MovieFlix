@@ -8,8 +8,9 @@ import Link from "next/link";
 import { FaUser, FaEnvelope, FaLock, FaFilm, FaImage, FaPhone } from "react-icons/fa";
 import ReactCrop, { type Crop, centerCrop, makeAspectCrop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import Image from "next/image";
 
-{/* Converts a canvas data URL to a File object */}
+{/* Converts a canvas data URL to a File object */ }
 function dataURLtoFile(dataurl: string, filename: string): File {
     const arr = dataurl.split(',');
     const mime = arr[0].match(/:(.*?);/)![1];
@@ -22,46 +23,46 @@ function dataURLtoFile(dataurl: string, filename: string): File {
     return new File([u8arr], filename, { type: mime });
 }
 
-{/* An animated background of scrolling movie posters */}
+{/* An animated background of scrolling movie posters */ }
 const BackgroundScroller = () => {
-  const posters = [
-    '/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg',
-    '/yUtaHkL2SDIAZhRApZAyQrAXygn.jpg',
-    '/kD0TOH6EM1q7UfgugBXuMoZd3m5.jpg',
-    '/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg',
-    '/kr36awqmziEI5mfUElsHB0pj9zP.jpg',
-    '/ljHw5eIMnki3HekwkKwCCHsRSbH.jpg',
-    '/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg',
-    '/9BAjt8nSSms62uOVYn1t3C3dVto.jpg',
-    '/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg',
-    '/cJRPOLEexI7qp2DKtFfCh7YaaUG.jpg',
-    '/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
-    '/kDp1vUBnMpe8ak4rjgl3c9L53HL.jpg',
-    '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
-    '/sF1U4EUQS8YJANg5pW3de2pLVPq.jpg',
-    '/rULWuutDcN5NvtiZi4FRPzRYWSh.jpg',
-    '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
-    '/zfbjgQE1uSd925saic9O92lGDs8.jpg',
-    '/f89SLAMbDUcvXJYsHkvgAhGkme.jpg',
-  ];
+    const posters = [
+        '/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg',
+        '/yUtaHkL2SDIAZhRApZAyQrAXygn.jpg',
+        '/kD0TOH6EM1q7UfgugBXuMoZd3m5.jpg',
+        '/q5pXRYTycaeW6dEgsCrd4mYPmxM.jpg',
+        '/kr36awqmziEI5mfUElsHB0pj9zP.jpg',
+        '/ljHw5eIMnki3HekwkKwCCHsRSbH.jpg',
+        '/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg',
+        '/9BAjt8nSSms62uOVYn1t3C3dVto.jpg',
+        '/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg',
+        '/cJRPOLEexI7qp2DKtFfCh7YaaUG.jpg',
+        '/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
+        '/kDp1vUBnMpe8ak4rjgl3c9L53HL.jpg',
+        '/qJ2tW6WMUDux911r6m7haRef0WH.jpg',
+        '/sF1U4EUQS8YJANg5pW3de2pLVPq.jpg',
+        '/rULWuutDcN5NvtiZi4FRPzRYWSh.jpg',
+        '/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
+        '/zfbjgQE1uSd925saic9O92lGDs8.jpg',
+        '/f89SLAMbDUcvXJYsHkvgAhGkme.jpg',
+    ];
 
-  const allPosters = [...posters, ...posters];
+    const allPosters = [...posters, ...posters];
 
-  return (
-    <div className="absolute inset-0 w-full h-full flex items-center overflow-hidden opacity-10">
-      <div className="scroller flex w-max">
-        {allPosters.map((poster, index) => (
-          <img
-            key={index}
-            src={`https://image.tmdb.org/t/p/w500${poster}`}
-            alt=""
-            className="w-48 h-auto object-cover mx-2 rounded-lg"
-            aria-hidden="true"
-            loading="lazy"
-          />
-        ))}
-      </div>
-      <style jsx>{`
+    return (
+        <div className="absolute inset-0 w-full h-full flex items-center overflow-hidden opacity-10">
+            <div className="scroller flex w-max">
+                {allPosters.map((poster, index) => (
+                    <img
+                        key={index}
+                        src={`https://image.tmdb.org/t/p/w500${poster}`}
+                        alt=""
+                        className="w-48 h-auto object-cover mx-2 rounded-lg"
+                        aria-hidden="true"
+                        loading="lazy"
+                    />
+                ))}
+            </div>
+            <style jsx>{`
         .scroller {
           animation: marquee 60s linear infinite;
         }
@@ -74,11 +75,11 @@ const BackgroundScroller = () => {
           }
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 };
 
-{/* The user registration page component */}
+{/* The user registration page component */ }
 export default function RegisterPage() {
     const router = useRouter();
     const [name, setName] = useState("");
@@ -96,7 +97,7 @@ export default function RegisterPage() {
     const imgRef = useRef<HTMLImageElement | null>(null);
     const [originalFileName, setOriginalFileName] = useState('');
 
-    {/* Opens the cropping modal when a user selects a file */}
+    {/* Opens the cropping modal when a user selects a file */ }
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
@@ -108,7 +109,7 @@ export default function RegisterPage() {
         }
     };
 
-    {/* Sets the initial crop area when the image loads in the modal */}
+    {/* Sets the initial crop area when the image loads in the modal */ }
     const onImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
         const { width, height } = e.currentTarget;
         const initialCrop = centerCrop(
@@ -119,7 +120,7 @@ export default function RegisterPage() {
         setCrop(initialCrop);
     };
 
-    {/* Confirms the crop and creates a file from the cropped image data */}
+    {/* Confirms the crop and creates a file from the cropped image data */ }
     const handleCropConfirm = () => {
         if (completedCrop?.width && completedCrop?.height && imgRef.current) {
             const canvas = document.createElement('canvas');
@@ -149,7 +150,7 @@ export default function RegisterPage() {
         setCropModalOpen(false);
     };
 
-    {/* Handles the user registration process */}
+    {/* Handles the user registration process */ }
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
@@ -238,7 +239,7 @@ export default function RegisterPage() {
 
             <div className="relative min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center bg-gray-950 p-4 overflow-hidden gap-8">
                 <BackgroundScroller />
-                
+
                 <div className="relative z-10 text-center">
                     <h1 className="text-3xl pb-2 font-extrabold text-white tracking-tight sm:text-5xl">
                         Enjoy 500+ movies in different languages
@@ -310,7 +311,7 @@ export default function RegisterPage() {
                                 className="hidden"
                             />
                         </div>
-                        
+
                         {croppedImageFile && (
                             <div className="flex justify-center">
                                 <img
