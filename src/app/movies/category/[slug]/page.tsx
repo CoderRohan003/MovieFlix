@@ -1,4 +1,6 @@
 import MovieCard from '@/components/movies/MovieCard';
+import { use } from 'react';
+
 import {
   fetchTrendingMovies,
   fetchMoviesByLanguage,
@@ -52,12 +54,8 @@ async function getCategoryData(slug: string): Promise<{ results: Movie[] }> {
 }
 
 {/* Renders a grid of movies for a selected category */}
-export default async function CategoryPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const { slug } = params;
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const data = await getCategoryData(slug);
   const movies = data.results || [];
   const title = categoryTitles[slug] || 'Movies';
