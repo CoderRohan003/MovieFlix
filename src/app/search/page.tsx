@@ -39,12 +39,11 @@ async function fetchAndSortMovies(query: string): Promise<Movie[]> {
 }
 
 {/* Displays search results based on the URL query */}
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
-  const query = searchParams?.q?.toString() || '';
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export default async function SearchPage(props: { searchParams?: SearchParams }) {
+  const searchParams = (props.searchParams ? await props.searchParams : {}) || {};
+  const query = searchParams.q?.toString() || '';
   const movies = await fetchAndSortMovies(query);
 
   return (
