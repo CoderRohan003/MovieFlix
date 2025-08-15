@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { account } from "@/lib/appwrite";
 import { Models } from "appwrite";
 import { FaUserCircle } from "react-icons/fa";
@@ -84,7 +85,9 @@ export default function Navbar() {
 
           <div className="flex items-center space-x-4">
             <div className="hidden lg:block">
-              <NavbarSearch />
+              <Suspense>
+                <NavbarSearch />
+              </Suspense>
             </div>
 
             <div className="hidden md:flex items-center space-x-2">
