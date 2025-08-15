@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Chatbot from "@/components/layout/ChatBot";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,6 +20,11 @@ export const metadata: Metadata = {
   description: "A movie discovery platform",
 };
 
+// A simple fallback component for the Navbar
+function NavbarFallback() {
+  return <div style={{ height: '64px' }} />; // An empty placeholder with the same height as your navbar
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,7 +35,11 @@ export default function RootLayout({
       <body
         className={`bg-black text-white ${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
+        {/* Wrap the component that uses the client-side hook */}
+        <Suspense fallback={<NavbarFallback />}>
           <Navbar />
+        </Suspense>
+
         <main className="flex-1">
           {children}
         </main>
