@@ -20,9 +20,8 @@ export const metadata: Metadata = {
   description: "A movie discovery platform",
 };
 
-// A simple fallback component for the Navbar
 function NavbarFallback() {
-  return <div style={{ height: '64px' }} />; // An empty placeholder with the same height as your navbar
+  return <div style={{ height: '64px' }} />; 
 }
 
 export default function RootLayout({
